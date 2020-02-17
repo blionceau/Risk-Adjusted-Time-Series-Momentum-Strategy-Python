@@ -1,0 +1,284 @@
+\documentclass[12pt]{report}
+%\usepackage[a4paper]{geometry}
+%\usepackage{geometry}
+%\geometry{a4paper, portrait,left=0mm,top=0mm}
+\usepackage[a4paper,bindingoffset=0in,%
+            left=-3in,right=-3in,top=-2in,bottom=-2in,%
+            footskip=0in]{geometry}
+\usepackage[myheadings]{fullpage}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{graphicx, wrapfig, subcaption, setspace, booktabs}
+\usepackage[T1]{fontenc}
+\usepackage[font=small, labelfont=bf]{caption}
+\usepackage{fourier}
+\usepackage[protrusion=true, expansion=true]{microtype}
+\usepackage[english]{babel}
+\usepackage{sectsty}
+\usepackage{url, lipsum}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{float}
+\restylefloat{table}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{color,soul}
+\usepackage{xcolor,colortbl} 
+\usepackage[affil-it]{authblk}
+\usepackage[affil-it]{authblk}
+
+%\usepackage[margin=0.5in]{geometry}
+
+\newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
+\onehalfspacing
+\setcounter{tocdepth}{5}
+\setcounter{secnumdepth}{5}
+
+%-------------------------------------------------------------------------------
+% HEADER & FOOTER
+%-------------------------------------------------------------------------------
+\pagestyle{fancy}
+\fancyhf{}
+\setlength\headheight{13pt}
+\fancyhead[L]{Bikorimana S.}
+\fancyhead[R]{NYU Courant}
+\fancyfoot[R]{Page \thepage\ of \pageref{LastPage}}
+%-------------------------------------------------------------------------------
+% TITLE PAGE
+%-------------------------------------------------------------------------------
+
+\begin{document}
+
+
+\title{ \normalsize \textsc{}
+		\\ [2.0cm]
+		\HRule{0.5pt} \\
+		\LARGE \textbf{\uppercase{RISK-ADJUSTED TIME-SERIES MOMENTUM}}
+		\HRule{2pt} \\ [0.5cm]
+		\normalsize 
+		\vspace*{5\baselineskip}}
+
+\date{December 26, 2018}
+
+
+
+
+%\author{
+		%Simeon Bikorimana sb6391@nyu.edu\\ 
+		%New York University Courant Institute\\
+%	 }
+	 
+
+
+\author{Simeon Bikorimana%
+  \thanks{Email address: \texttt{simeon.bikorimana@nyu.edu}}\\}
+\affil{Courant Institute, New York University}
+
+\newline
+
+
+
+
+
+\maketitle
+\tableofcontents
+\newpage
+
+%-------------------------------------------------------------------------------
+% Section title formatting
+\sectionfont{\scshape}
+%-------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------
+% BODY
+%-------------------------------------------------------------------------------
+
+
+%\maketitle
+%\tableofcontents
+%\newpage
+
+%\title{S\&P 500 Market Research Report}
+%\author{Yusong Pan}
+%\date{December 25, 2018}
+%\maketitle
+\section{Abstract}
+We develop a risk-adjusted time-series momentum strategy where stock selection criteria based on reward-risk plays a key role in our momentum portfolio construction. We use the Sharpe ratio on individual securities utilizing the S\&P 500 universe-daily data. We construct equally-weighted portfolios, and we find that the long only strategy outperforms the long-short strategy. We obtain a historical annual return of 12.8 \% from the long only strategy without considering any implementing costs. 
+\section{Introduction}
+For the past several decades, different finance research groups developed several theories trying to explain the driving forces behind the cross-section of stock returns. Past returns were generally found to be one of the forces that drive the cross-section of stock returns during a given period. Generally, taking on extra risk is one way to make a profit above market returns as suggested by the capital asset pricing model, CAPM, Treynor, J. (1961); Mossin, J. (1966); Sharpe, F.W. (1964). Practically, expected returns are not strongly proportional to a security risk factor. Most recent literature documents opposed the prediction of the CAPM. Besides, several models beyond CAPM were developed to better explain asset pricing, Jagadeesh, N. and Titman, S. (1993); Fama, E. F., and French, K. R. (1993 and 1996). Also, a variation on the multi-factor asset pricing model that includes momentum was introduced, Carhart, M.M. (1997). 
+
+Jagadeesh, N.and Titman, S. (1993), Lee M.C. C. and Swaminathan B. (2000) demonstrated that variables such as momentum can adequately explain the cross-section of average stock returns. Several momentum strategies have been developed. For example, Jagadeesh, N. and Titman, S. (1993) reported that strategies that buy past winners and sell past losers realize strong abnormal results over the 1965-89 periods. And, investor under-reaction to information is linked to the drive of individual stock momentum, Jagadeesh, N. and Titman, S. (1993). Moreover, Jagadeesh, N. and Titman, S. (2001) found that the momentum profits in the eight years subsequent to their 1993 period are similar to the profits in the earlier period. They showed that one can gain strong returns by holding a zero-cost portfolio by buying past winners and selling past losers during the same period. 
+
+Lee, M.C. and Swaminathan B. (2000) found that the effect of momentum appears more pronounced among high-volume stocks than those of low-volume stocks. However, no measures of risk have been found that completely explain momentum returns because the long-term reversals are not robust to risk adjustment, Lee, M.C. and Swaminathan, B. (2000) and Grinblatt, M. and Moskowitz, J. T. (2003). Also, the intermediate return continuation has been a more resilient anomaly. Lee M.C. and Swaminathan, B. (2000) suggested that there is a link between momentum and value strategies. 
+
+The strategy of buying past outperforming stocks and selling past underperforming stocks over the time horizons between 6 and 12 months have proven to provide statistically significant historical returns of around 1\% per month. Practically, some momentum strategies underperform from long periods of negative returns, for instance, during market downturns where large drawdowns can occur several times. Therefore, adjusting or stabilizing the momentum trading signal by penalizing recent outperforming stocks based on their risk can remove the introduced noise from their fluctuating stochastic volatility. 
+
+Different momentum strategies have been developed, such as price momentum, time-series momentum, cross-sectional momentum, risk-adjusted momentum, constant volatility scaling momentum and dynamic volatility scaling momentum, Fan M. et al. (2017), etc... However, there is no single accepted theory that explains why momentum works.
+
+A typical trading momentum strategy such as, price momentum, time-series momentum, cross-sectional momentum utilizes signals that are based on averages of past returns thereby ignoring the noise that it is introduced into these signals by fluctuating stochastic volatility. Therefore, the estimate of the true expected returns becomes very noisy. Whereas, risk-adjusted time-series momentum, Fan, M. et al. (2017), constant volatility scaling momentum, Barroso, P. and Santa-Clara, P. (2015) and dynamic volatility scaling momentum, Daniel, K. and Moskowitz, J. T. (2016), incorporate realized volatility. Typically, we can obtain stable trading signals, which do not follow changes in fundamentals by performing normalization of past returns by their realized volatility that removes a part of their variation that is driven by changing volatility. Besides, the constant volatility scaling method was found to be the most efficient approach compared to the dynamic volatility scaling method, Fan M. et al. (2017).
+
+In this project, we develop a risk-adjusted time-series momentum strategy where stock selection criteria based on reward-risk plays a key role in our momentum portfolio construction. We use the ordinary Sharpe ratio on individual securities utilizing S\&P 500 universe-daily data obtained from Yahoo Finance (2018). Moreover, we consider and compare the performance of two investment methods where we construct equally-weighted portfolios. Firstly, we only long the top 10\% of the winning stocks based on their Sharpe ratio. Secondly, we perform the long-short strategy where we long the top 10\% of the winning stocks and short the bottom 10\% losing stocks, also including a ranking method  based on their Sharpe ratio.
+
+Furthermore, Bernardo, E. A. and Ledoit, O. (2000) demonstrated that erroneous asset selection decisions would be made when the Sharpe ratios are applied to asset returns that follow a non-Gaussian distribution. However, for simplicity, we consider using the ordinary Sharpe ratio, Sharpe, W. F. (1994). Note that results obtained using decisions made based on the Sharpe ratio would be optimal if the vector of returns is Gaussian. 
+
+We find that the long only strategy outperforms the long-short strategy. We obtain a historical annual return of 12.8 \% from the long only strategy without considering any implementing costs.
+
+\section{Methodology}
+Traditional momentum strategies usually mean buying and selling stocks in accordance with their performance. The strategies believe that stocks that are going up will continue to go up and stocks are going down will continue to go down. However, these kinds of strategies have an obvious issue that they only consider the change of return instead of looking at the risk in order to get high returns. For our strategy, instead of focusing on return, we choose the Sharpe ratio to be our signal because based on the definition of the Sharpe ratio, we know that Sharpe ratio can capture risk very well. The ratio is refered to as the average return earned in excess of the risk-free rate per unit of volatility or total risk, Sharpe, W.F. (1994). Thus, it is the risk-adjusted return. 
+
+In our project, we consider two situations. One is long only, and the other one involves long-short short strategy. Note that for simplicity we do not consider any implementing costs at all. However, there are several components of implementing costs, Korajczyk, A. R. and Sadka, R. (2004). Unfortunately, one has to consider costs while running momentum portfolios in the real world. Although momentum strategies can offer a high turnover, implementing costs could wipe out most of their so-called paper premiums, such as the ones obtained in our project, Israel R. et al. (2017). 
+When building our momentum strategy model, there are several parameters to be considered:
+
+\begin{itemize}
+
+ \item\textbf{Refreshing rate}, which means how frequent we change the position of the portfolio. In our case, we set it to be 10 days.
+ \item\textbf{Past performance window}, which means how many days we choose to be our benchmark. In our case, we set it to be 20 days.
+ \item\textbf{Stock pool}: We choose the S\&P 500 universe in our case because it has high liquidity and high diversity of stocks.
+ \item\textbf{Selection standards}: In our case, we rank the Sharpe ratio of each stock and get top 10\% to long and bottom 10\% to short.
+\end{itemize}
+
+Thus, our strategy is as follows, firstly, we rank the Sharpe ratio of all stocks in the S\&P500, and the window size we set is 20 days. Then, we choose to long the top 10\% of the stocks and short the bottom 10\% of the stocks, and we use an equal-weight method, which means equal holding amount. We hold the portfolio for 10 days, and at the refreshing day, we rank the Sharpe ratio again based on stocks' past 20 days' performances, then repeat the process as mentioned above again.
+
+\section{Results and Discussion}
+
+\subsection{Background}
+
+In order to assess the performance of our portfolio, we gauge the following metrics:
+
+\begin{itemize}
+ \item\textbf{Beta}: Beta is a measure of the volatility, or systematic risk, of a security or a portfolio in comparison to the entire market or a benchmark.
+ 
+ $$Beta = \frac{cov(R_p,R_m)}{var(R_m)}$$
+ $R_p$ represents the portfolio return 
+ 
+ $R_m$ represents the market return
+ \item\textbf{Alpha}: Alpha, often considered the active return on investment, gauges the performance of investment against a market index or benchmark which is considered to represent the market's movement as a whole. 
+ $$Alpha=R_p - R_f - \beta*(R_m-R_f)$$
+
+
+$R_f$ represents the risk-free rate of return
+
+$\beta$ represents the systemic risk of a portfolio.
+
+
+ 
+ \item\textbf{ Sharpe Ratio}: The ratio is the average return earned in excess of the risk-free rate per unit of volatility or total risk. 
+ 
+ $$ Sharpe \ Ratio= \frac{R_p - R_m}{\sigma_p}$$
+ 
+ \item\textbf{IR}: The information ratio (IR) is a measure of portfolio returns above the returns of a benchmark, usually an index, to the volatility of those returns.
+$$Information \ Ratio = \frac{R_p - R_m}{S_{p-m}}$$
+$S_{p-m} $ = Tracking error (standard deviation of the difference between returns of the portfolio and the returns of the index)
+ \item\textbf{Max Draw-down}: A maximum drawdown (MDD) is the maximum loss from a peak to a trough of a portfolio before a new peak is attained. Maximum Drawdown (MDD) is an indicator of downside risk over a specified time period. Maximum Drawdown is expressed in percentage terms and computed as:
+ 
+ $$Maximum \ Drawdown = \frac{(Trough Value - Peak Value)}{ Peak Value}$$
+\end{itemize}
+
+\subsection{Discussion}
+After implementing the above strategies, we obtain the following results, as shown in Figure 1, Figure 2, Table 1, and Table 2. 
+Figure 1 illustrates the capital changing process of buying the top 10\% of Sharpe ratio ranking stocks based on the past 20 day's performance, and refreshing the position every 10 days.
+
+Table 1 shows measured metrics providing all the information of the long only strategy, including annual return, beta, alpha, return volatility, Sharpe ratio, information ratio, and maximum draw-down.
+
+The long only strategy, where we buy the top 10\% of Sharpe ratio ranking stocks, beats the market (i.e., the S\&P500 index) between 2013 and 2016 (See Figure 1). The risk-adjusted momentum (i.e., Sharpe momentum) exhibits historical annual returns of 12.8\% between February 2013 and February 2018 with a Sharpe ratio of 6.51, as shown in Table 1.
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth,height = 0.6\textwidth]{long.png}
+\caption{\label{fig:scatter_SMB}Plot of Capital Change of buying top 10\% of Sharpe ratio stocks}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{c c c c c c c c c c}
+\toprule
+\textbf{Annual Return} & \textbf{Beta} & \textbf{Alpha} & \textbf{Volatility} & \textbf{Sharpe Ratio} & \textbf{IR} & \textbf{Max Draw-down}\\
+\hline
+12.8\% & 0.93 & 1.42\% & 1.97\% & 6.51 & 0.262 & 14.20\%\\
+\bottomrule
+\end{tabular}
+\caption{Information of Strategy of buying top 10\% of Sharpe ratio stocks}
+\label{tab:my_label}
+\end{table}
+
+Furthermore, we construct an equally-weighted portfolio with the long-short strategy where we choose to long the top 10\% of the stocks and short the bottom 10\% of the stocks also based on the Sharpe ratio ranking method. 
+
+Figure 2 demonstrates the capital changing process of buying the top 10\% and short the bottom 10\% of Sharpe ratio ranking stocks based on the past 20 day's performance and refreshing the position every 10 days.
+
+Table 2 shows measured metrics providing all the information of the above strategy including annual return, beta, alpha, return volatility, Sharpe ratio, information ratio, and maximum draw-down. 
+
+The long-short strategy, where we long the top 10\% and short the bottom 10\% of Sharpe ratio ranking stocks, underperforms the market (i.e., the S\&P 500 index) between 2013 and 2018 (See Figure 2). In this case, the risk-adjusted momentum (i.e., Sharpe momentum) exhibits lower historical an annual return, compared to the S\&P 500 index, with an annual return of 9.91\% between February 2013 and February 2018 and a Sharpe ratio of 6.22, as shown in Table 2.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth,height = 0.6\textwidth]{long_short_no_fee.jpeg}
+\caption{\label{fig:scatter_SMB}Plot of Capital Change of buying top 10\% and selling bottom 10\% of Sharpe ratio stocks}
+\end{figure}
+
+
+
+\begin{table}[H]
+\centering
+\begin{tabular}{c c c c c c c c c c}
+\toprule
+\textbf{Annual Return} & \textbf{Beta} & \textbf{Alpha} & \textbf{Volatility} & \textbf{Sharpe Ratio} & \textbf{IR} & \textbf{Max Draw-down}\\
+\hline
+9.91\% & 0.68 & 0.96\% & 1.59\% & 6.22 & -0.795 & 10.89\%\\
+\bottomrule
+\end{tabular}
+\caption{Information of Strategy of buying top 10\% and selling bottom 10\% of Sharpe ratio stocks}
+\label{tab:my_label}
+\end{table}
+
+
+Based on the above results, we find that the long only strategy outperforms the long-short strategy. Obviously, because of the extra taken risk ( i.e., Beta of 0.93 vs. beta of 0.68). Also, its time-effectiveness comes into play because the market tends to go up during the above considered period (i.e., 2013-2018) where the short bottom 10\% also tends to go up. Moreover, the long only strategy has slightly higher Sharpe ratio compared to the long-short strategy, as shown in both tables, Table 1 and Table 2. However, the long strategy is more volatile than the long-short strategy ( i.e., 1.97\% vs. 1.59\%). In addition, the long-short strategy exhibits a lower maximum drawdown with a margin of 3.31\%. Thus, depending on the investor's preferences, if she prefers a low maximum drawdown as it indicates that losses from investment were small, she would prefer the long-short strategy.
+\section{Conclusion}
+We perform the risk-adjusted momentum strategy (i.e., the Sharpe momentum) considering two methods, (i) the long only strategy of buying top 10\% of Sharpe ratio stocks, and (ii) the long-short strategy of buying top 10\% of Sharpe ratio stocks and selling the bottom 10\% of Sharpe ratio stocks. We gauge different metrics , such as annual return, beta, Sharpe ratio, volatility, etc..., to compare both of methods. We find that the long only strategy outperforms the long-short strategy because of several reasons, such as extra risk, time effectiveness. We obtain a good historical annual return of 12.8\% from the long only strategy without considering any implementing costs. Although the obtained Sharpe momentum strategies' high turnover, one should be aware that implementing costs could wipe out some of the returns.
+
+\begin{flushleft}\end{flushleft}\begin{flushleft}\end{flushleft}\begin{flushleft}\end{flushleft}\begin{flushleft}\end{flushleft}\begin{flushleft}\end{flushleft}\begin{flushleft}\end{flushleft}\begin{flushleft}\end{flushleft}\begin{flushleft}\end{flushleft}\begin{flushleft}\end{flushleft}\begin{flushleft}\end{flushleft}\begin{flushleft}\end{flushleft}\begin{flushleft}\end{flushleft}
+
+\section{References}
+\begin{flushleft}
+Barroso, P. and Santa-Clara, P. (2015) "Momentum has its moments," Journal of Financial Economics, 116(1), pp.111-120
+\end{flushleft}
+\begin{flushleft}
+Bernardo, A.E. and Ledoit, O. (2000) "Gain, loss, and asset pricing," Journal of Political Economy, 108(1), pp.144-172
+\end{flushleft}
+\begin{flushleft}
+Daniel, K. and Moskowitz, T.J. (2016) "Momentum crashes," Journal of Financial Economics, 122(2), pp.221-247
+\end{flushleft}
+
+\begin{flushleft}
+Fan, M., Li, Y. and Liu, J., (2018) "Risk adjusted momentum strategies: a comparison between constant and dynamic volatility scaling approaches," Research in International Business and Finance
+\end{flushleft}
+\begin{flushleft}
+https://finance.yahoo.com/
+\end{flushleft}
+\begin{flushleft}
+Jegadeesh N, and Titman S. (2001) "Profitability of momentum strategies: An evaluation of alternative explanations," The Journal of finance, 56(2), 699-720
+\end{flushleft}
+\begin{flushleft}
+Jegadeesh, N. and Titman, S. (1993) "Returns to Buying Winners and Selling Losers: Implications for Stock Market Efficiency," Journal of Finance, 48, (1), 65-91
+\end{flushleft}
+
+\begin{flushleft}
+Lee, C. M., and Swaminathan, B. (2000) "Price momentum and trading volume," The Journal of Finance, 55(5), 2017-2069
+\end{flushleft}
+\begin{flushleft}
+Moskowitz, T.J. and Grinblatt, M. (1999) "Do industries explain momentum? " The Journal of Finance, 54(4), pp.1249-1290
+\end{flushleft}
+\begin{flushleft}
+Mossin, J. (1966) "Equilibrium in a Capital Asset Market," Econometrica, 34, 768-783
+\end{flushleft}
+\begin{flushleft}
+Sharpe, W.F. (1964) "Capital Asset Prices: A Theory of Market Equilibrium under Conditions of Risk," Journal of Finance, 19, 425-442
+\end{flushleft}
+\begin{flushleft}
+Treynor, J.L. (1961) "Market Value, Time and Risk," Unpublished Manuscript
+\end{flushleft}
+\begin{flushleft}
+Treynor, J.L. (1961) "Toward a Theory of Market Value of Risky Assets," Unpublished Manuscript, 6
+\end{flushleft}
+
+\end{document}
