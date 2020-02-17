@@ -1,0 +1,2 @@
+# Risk-Adjusted-Time-Series-Momentum-Strategy
+We develop a risk-adjusted time-series momentum strategy where stock selection criteria based on reward-risk plays a key role in our momentum portfolio construction. We use the Sharpe ratio on individual securities utilizing the S&amp;P 500 universe-daily data. We construct equally-weighted portfolios, and we find that the long only strategy outperforms the long- short strategy. We obtain a historical annual return of 12.8 % from the long only strategy without considering any implementing costs.
